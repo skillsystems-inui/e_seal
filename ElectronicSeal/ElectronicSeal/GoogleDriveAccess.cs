@@ -12,9 +12,9 @@ using System.IO;
 
 namespace ElectronicSeal
 {
-	public partial class Menu : Form
+	public partial class GoogleDriveAccess : Form
 	{
-		public Menu()
+		public GoogleDriveAccess()
 		{
 			InitializeComponent();
 		}
@@ -27,9 +27,8 @@ namespace ElectronicSeal
 
 		private void btnGAccess_Click(object sender, EventArgs e)
 		{
-			//GoogleDriveアクセス 
-			GoogleDriveAccess gda = new GoogleDriveAccess();
-			gda.ShowDialog();
+			//閉じる
+			this.Close();
 		}
 	}
 }

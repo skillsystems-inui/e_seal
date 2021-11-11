@@ -32,6 +32,7 @@ namespace ElectronicSeal
 			this.btnKeiyaku = new System.Windows.Forms.Button();
 			this.btnInei = new System.Windows.Forms.Button();
 			this.btnUser = new System.Windows.Forms.Button();
+			this.btnGAccess = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnKeiyaku
@@ -62,11 +63,22 @@ namespace ElectronicSeal
 			this.btnUser.Text = "ユーザー情報";
 			this.btnUser.UseVisualStyleBackColor = true;
 			// 
+			// btnGAccess
+			// 
+			this.btnGAccess.Location = new System.Drawing.Point(63, 251);
+			this.btnGAccess.Name = "btnGAccess";
+			this.btnGAccess.Size = new System.Drawing.Size(262, 23);
+			this.btnGAccess.TabIndex = 7;
+			this.btnGAccess.Text = "GoogleDriveアクセス";
+			this.btnGAccess.UseVisualStyleBackColor = true;
+			this.btnGAccess.Click += new System.EventHandler(this.btnGAccess_Click);
+			// 
 			// Menu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(386, 376);
+			this.Controls.Add(this.btnGAccess);
 			this.Controls.Add(this.btnUser);
 			this.Controls.Add(this.btnInei);
 			this.Controls.Add(this.btnKeiyaku);
@@ -80,6 +92,7 @@ namespace ElectronicSeal
 		private System.Windows.Forms.Button btnKeiyaku;
 		private System.Windows.Forms.Button btnInei;
 		private System.Windows.Forms.Button btnUser;
+		private System.Windows.Forms.Button btnGAccess;
 	}
 }
 
