@@ -123,6 +123,12 @@
     <Compile Include="KeiyakuList.Designer.cs">
       <DependentUpon>KeiyakuList.cs</DependentUpon>
     </Compile>
+    <Compile Include="GoogleDriveAccess.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoogleDriveAccess.Designer.cs">
+      <DependentUpon>GoogleDriveAccess.cs</DependentUpon>
+    </Compile>
     <Compile Include="Menu.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -142,6 +148,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="KeiyakuList.resx">
       <DependentUpon>KeiyakuList.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GoogleDriveAccess.resx">
+      <DependentUpon>GoogleDriveAccess.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Menu.resx">
       <DependentUpon>Menu.cs</DependentUpon>

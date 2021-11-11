@@ -36,6 +36,7 @@ namespace ElectronicSeal
 			this.button2 = new System.Windows.Forms.Button();
 			this.label1 = new System.Windows.Forms.Label();
 			this.textBox3 = new System.Windows.Forms.TextBox();
+			this.openFileDialog1 = new System.Windows.Forms.OpenFileDialog();
 			this.SuspendLayout();
 			// 
 			// btnClose
@@ -70,6 +71,7 @@ namespace ElectronicSeal
 			this.button1.TabIndex = 10;
 			this.button1.Text = "button1";
 			this.button1.UseVisualStyleBackColor = true;
+			this.button1.Click += new System.EventHandler(this.button1_Click);
 			// 
 			// button2
 			// 
@@ -79,6 +81,7 @@ namespace ElectronicSeal
 			this.button2.TabIndex = 11;
 			this.button2.Text = "button2";
 			this.button2.UseVisualStyleBackColor = true;
+			this.button2.Click += new System.EventHandler(this.button2_Click);
 			// 
 			// label1
 			// 
@@ -96,6 +99,10 @@ namespace ElectronicSeal
 			this.textBox3.Name = "textBox3";
 			this.textBox3.Size = new System.Drawing.Size(654, 211);
 			this.textBox3.TabIndex = 13;
+			// 
+			// openFileDialog1
+			// 
+			this.openFileDialog1.FileName = "openFileDialog1";
 			// 
 			// GoogleDriveAccess
 			// 
@@ -124,6 +131,7 @@ namespace ElectronicSeal
 		private System.Windows.Forms.Button button2;
 		private System.Windows.Forms.Label label1;
 		private System.Windows.Forms.TextBox textBox3;
+		private System.Windows.Forms.OpenFileDialog openFileDialog1;
 	}
 }
 
