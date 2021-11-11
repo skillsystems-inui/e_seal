@@ -16,5 +16,11 @@ namespace ElectronicSeal
 		{
 			InitializeComponent();
 		}
+
+		private void btnKeiyaku_Click(object sender, EventArgs e)
+		{
+			KeiyakuList list = new KeiyakuList();
+			list.ShowDialog();
+		}
 	}
 }

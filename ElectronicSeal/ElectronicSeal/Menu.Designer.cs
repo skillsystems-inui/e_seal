@@ -42,6 +42,7 @@ namespace ElectronicSeal
 			this.btnKeiyaku.TabIndex = 4;
 			this.btnKeiyaku.Text = "契約一覧";
 			this.btnKeiyaku.UseVisualStyleBackColor = true;
+			this.btnKeiyaku.Click += new System.EventHandler(this.btnKeiyaku_Click);
 			// 
 			// btnInei
 			// 
