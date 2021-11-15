@@ -112,6 +112,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="GoogleDriveAccessDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GoogleDriveAccessDownload.Designer.cs">
+      <DependentUpon>GoogleDriveAccessDownload.cs</DependentUpon>
+    </Compile>
     <Compile Include="KeiyakuDetail.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -144,6 +150,9 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GoogleDriveAccessDownload.resx">
+      <DependentUpon>GoogleDriveAccessDownload.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="KeiyakuDetail.resx">
       <DependentUpon>KeiyakuDetail.cs</DependentUpon>
     </EmbeddedResource>

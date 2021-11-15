@@ -33,6 +33,7 @@ namespace ElectronicSeal
 			this.btnInei = new System.Windows.Forms.Button();
 			this.btnUser = new System.Windows.Forms.Button();
 			this.btnGAccess = new System.Windows.Forms.Button();
+			this.btnGAccessDownload = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// btnKeiyaku
@@ -69,15 +70,26 @@ namespace ElectronicSeal
 			this.btnGAccess.Name = "btnGAccess";
 			this.btnGAccess.Size = new System.Drawing.Size(262, 23);
 			this.btnGAccess.TabIndex = 7;
-			this.btnGAccess.Text = "GoogleDriveアクセス";
+			this.btnGAccess.Text = "GoogleDriveアップロード";
 			this.btnGAccess.UseVisualStyleBackColor = true;
 			this.btnGAccess.Click += new System.EventHandler(this.btnGAccess_Click);
+			// 
+			// btnGAccessDownload
+			// 
+			this.btnGAccessDownload.Location = new System.Drawing.Point(63, 280);
+			this.btnGAccessDownload.Name = "btnGAccessDownload";
+			this.btnGAccessDownload.Size = new System.Drawing.Size(262, 23);
+			this.btnGAccessDownload.TabIndex = 8;
+			this.btnGAccessDownload.Text = "GoogleDriveダウンロード";
+			this.btnGAccessDownload.UseVisualStyleBackColor = true;
+			this.btnGAccessDownload.Click += new System.EventHandler(this.btnGAccessDownload_Click);
 			// 
 			// Menu
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(386, 376);
+			this.Controls.Add(this.btnGAccessDownload);
 			this.Controls.Add(this.btnGAccess);
 			this.Controls.Add(this.btnUser);
 			this.Controls.Add(this.btnInei);
@@ -93,6 +105,7 @@ namespace ElectronicSeal
 		private System.Windows.Forms.Button btnInei;
 		private System.Windows.Forms.Button btnUser;
 		private System.Windows.Forms.Button btnGAccess;
+		private System.Windows.Forms.Button btnGAccessDownload;
 	}
 }
 

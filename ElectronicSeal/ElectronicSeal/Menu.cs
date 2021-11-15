@@ -31,5 +31,12 @@ namespace ElectronicSeal
 			GoogleDriveAccess gda = new GoogleDriveAccess();
 			gda.ShowDialog();
 		}
+
+		private void btnGAccessDownload_Click(object sender, EventArgs e)
+		{
+			//GoogleDriveアクセスダウンロード 
+			GoogleDriveAccessDownload gda = new GoogleDriveAccessDownload();
+			gda.ShowDialog();
+		}
 	}
 }
