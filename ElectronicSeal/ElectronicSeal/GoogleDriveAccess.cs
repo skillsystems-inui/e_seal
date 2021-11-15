@@ -15,12 +15,21 @@ namespace ElectronicSeal
 {
 	public partial class GoogleDriveAccess : Form
 	{
-		public GoogleDriveAccess()
+        //GoogleDriveのフォルダID
+        private string myDriveFolderId = "1jTtHCWA1n3iI026QKYwdFnfYa9uPWaZe";
+        
+        public GoogleDriveAccess()
 		{
 			InitializeComponent();
-		}
 
-		private void btnGAccess_Click(object sender, EventArgs e)
+            //GoogleDriveのフォルダIDを初期表示する ToDoこれをどのように指定するか考慮が必要
+            this.textBox2.Text = myDriveFolderId;
+        }
+
+        //Google API サービスアカウントの認証キー
+        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
+
+        private void btnGAccess_Click(object sender, EventArgs e)
 		{
 			//閉じる
 			this.Close();
@@ -38,7 +47,7 @@ namespace ElectronicSeal
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-            FileStream fs = new FileStream("ipentectest-854e0153b985.json", FileMode.Open, FileAccess.Read);
+            FileStream fs = new FileStream(google_api_service_account_key, FileMode.Open, FileAccess.Read);
             Google.Apis.Auth.OAuth2.GoogleCredential credential;
             try
             {
@@ -51,7 +60,7 @@ namespace ElectronicSeal
 
             Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
             init.HttpClientInitializer = credential;
-            init.ApplicationName = "My Test App";
+            init.ApplicationName = "ElectronicSeal";
             DriveService service = new DriveService(init);
 
 
