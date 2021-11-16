@@ -13,7 +13,8 @@ using System.IO;
 
 namespace ElectronicSeal
 {
-	public partial class GoogleDriveAccessDownload : Form
+    //参考サイト: https://www.ipentec.com/document/csharp-google-drive-download-file
+    public partial class GoogleDriveAccessDownload : Form
 	{
         //GoogleDriveのフォルダID ToDoこれをどのように指定するか考慮が必要
         private string myDriveFileId = "1XIg_KtZ9jr19rw9FxlFDV1r4YM-SPgcK";                         //取得方法: https://intercom.help/roboticcrowd/ja/articles/2416227-08-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABid-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AAid
