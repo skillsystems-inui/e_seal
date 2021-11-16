@@ -13,11 +13,14 @@ using System.IO;
 
 namespace ElectronicSeal
 {
-	public partial class DropBoxAccessUpload : Form
+    //参考サイト: http://www.ipentec.com/document/csharp-google-drive-upload-file
+    public partial class DropBoxAccessUpload : Form
 	{
         //GoogleDriveのフォルダID
         private string myDriveFolderId = "1jTtHCWA1n3iI026QKYwdFnfYa9uPWaZe";
-        
+        //Google API サービスアカウントの認証キー
+        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
+
         public DropBoxAccessUpload()
 		{
 			InitializeComponent();
@@ -25,9 +28,6 @@ namespace ElectronicSeal
             //GoogleDriveのフォルダIDを初期表示する ToDoこれをどのように指定するか考慮が必要
             this.textBox2.Text = myDriveFolderId;
         }
-
-        //Google API サービスアカウントの認証キー
-        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
 
         private void btnGAccess_Click(object sender, EventArgs e)
 		{
@@ -60,7 +60,7 @@ namespace ElectronicSeal
 
             Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
             init.HttpClientInitializer = credential;
-            init.ApplicationName = "ElectronicSeal";
+            init.ApplicationName = "ElectronicSeal";//プロジェクト名を指定
             DriveService service = new DriveService(init);
 
 

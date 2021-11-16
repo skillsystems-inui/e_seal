@@ -13,10 +13,13 @@ using System.IO;
 
 namespace ElectronicSeal
 {
-	public partial class DropBoxAccessDownload : Form
+    //参考サイト: https://www.ipentec.com/document/csharp-google-drive-download-file
+    public partial class DropBoxAccessDownload : Form
 	{
         //GoogleDriveのフォルダID ToDoこれをどのように指定するか考慮が必要
         private string myDriveFileId = "1XIg_KtZ9jr19rw9FxlFDV1r4YM-SPgcK";
+        //Google API サービスアカウントの認証キー
+        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
 
         //FolderBrowserDialogクラスのインスタンスを作成
         FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -35,9 +38,6 @@ namespace ElectronicSeal
             fbd.ShowNewFolderButton = true;
         }
 
-        //Google API サービスアカウントの認証キー
-        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
-
         private void btnGAccess_Click(object sender, EventArgs e)
 		{
 			//閉じる
@@ -53,7 +53,7 @@ namespace ElectronicSeal
 
             Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
             init.HttpClientInitializer = credential;
-            init.ApplicationName = "ElectronicSeal";
+            init.ApplicationName = "ElectronicSeal";//プロジェクト名を指定
             DriveService service = new DriveService(init);
 
             //FileInfo
