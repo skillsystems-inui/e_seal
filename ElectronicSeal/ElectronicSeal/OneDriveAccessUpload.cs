@@ -7,27 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Web;
-using Google.Apis.Drive.v3;
-using System.IO;
+using Microsoft.Identity.Client;
+using Microsoft.Graph;
 
 namespace ElectronicSeal
 {
 	public partial class OneDriveAccessUpload : Form
 	{
-        //GoogleDriveのフォルダID
-        private string myDriveFolderId = "1jTtHCWA1n3iI026QKYwdFnfYa9uPWaZe";
-        
-        public OneDriveAccessUpload()
+		public static IPublicClientApplication PublicClientApp;
+		private string ClientId = "093e6c05-7227-4b80-bd79-2ef280a3f869";
+		private string TenantId = "f8cdef31-a31e-4b4a-93e4-5f571e91255a";
+
+		public OneDriveAccessUpload()
 		{
 			InitializeComponent();
-
-            //GoogleDriveのフォルダIDを初期表示する ToDoこれをどのように指定するか考慮が必要
-            this.textBox2.Text = myDriveFolderId;
         }
-
-        //Google API サービスアカウントの認証キー
-        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
 
         private void btnGAccess_Click(object sender, EventArgs e)
 		{
@@ -35,59 +29,44 @@ namespace ElectronicSeal
 			this.Close();
 		}
 
-		static string[] Scopes = { DriveService.Scope.Drive };
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-			if (openFileDialog1.ShowDialog() == DialogResult.OK)
-			{
-				textBox1.Text = openFileDialog1.FileName;
-			}
-		}
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            //アップロード
+            PublicClientApplicationBuilder app = PublicClientApplicationBuilder.Create(ClientId);
+            app = app.WithRedirectUri("https://login.microsoftonline.com/common/oauth2/nativeclient");
+            app = app.WithAuthority(AzureCloudInstance.AzurePublic, TenantId);
+            PublicClientApp = app.Build();
+            //
+            string[] scopes = new string[] { "User.ReadWrite.All" };
+            string account = "eseal0skill0test@gmail.com";
+            string password = "system4199";
+            System.Security.SecureString secpass = new System.Security.SecureString();
+
+            foreach (char c in password) secpass.AppendChar(c);
+
+            AcquireTokenByUsernamePasswordParameterBuilder builder = PublicClientApp.AcquireTokenByUsernamePassword(scopes, account, secpass);
+            AuthenticationResult authResult = await builder.ExecuteAsync();
+
+            DelegateAuthenticationProvider prov = new DelegateAuthenticationProvider(
+              (requestMessage) =>
+              {
+                  requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", authResult.AccessToken);
+                  return Task.FromResult(0);
+              }
+              );
+            GraphServiceClient client = new GraphServiceClient(prov);
+
+            System.IO.StreamReader reader = System.IO.File.OpenText("test02.txt");
+
+            DriveItem item = await client.Me.Drive.Root.ItemWithPath("upload-test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
+
+            textBox1.Text += "アップロードしました。";
+        }
 
 		private void button2_Click(object sender, EventArgs e)
 		{
-            FileStream fs = new FileStream(google_api_service_account_key, FileMode.Open, FileAccess.Read);
-            Google.Apis.Auth.OAuth2.GoogleCredential credential;
-            try
-            {
-                credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromStream(fs).CreateScoped(Scopes);
-            }
-            finally
-            {
-                fs.Close();
-            }
-
-            Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
-            init.HttpClientInitializer = credential;
-            init.ApplicationName = "ElectronicSeal";
-            DriveService service = new DriveService(init);
-
-
-            Google.Apis.Upload.IUploadProgress prog;
-            FileStream fsu = new FileStream(textBox1.Text, FileMode.Open);
-            try
-            {
-                //Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider fpv = new Microsoft.AspNetCore.StaticFiles.FileExtensionContentTypeProvider();
-                //string ContentType;
-                //fpv.TryGetContentType(textBox1.Text, out ContentType);
-                string ContentType = System.Web.MimeMapping.GetMimeMapping(textBox1.Text);
-
-                Google.Apis.Drive.v3.Data.File meta = new Google.Apis.Drive.v3.Data.File();
-                meta.Name = Path.GetFileName(textBox1.Text);
-                meta.MimeType = ContentType;
-                meta.Parents = new List<string>() { textBox2.Text };
-
-                Google.Apis.Drive.v3.FilesResource.CreateMediaUpload req = service.Files.Create(meta, fsu, ContentType);
-                req.Fields = "id, name";
-                prog = req.Upload();
-            }
-            finally
-            {
-                fsu.Close();
-            }
-
-            textBox3.Text = string.Format("アップロードが完了しました。{0:d}byte", prog.BytesSent);
+           
         }
 	}
 }
