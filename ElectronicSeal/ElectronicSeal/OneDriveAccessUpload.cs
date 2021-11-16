@@ -15,8 +15,8 @@ namespace ElectronicSeal
 	public partial class OneDriveAccessUpload : Form
 	{
 		public static IPublicClientApplication PublicClientApp;
-		private string ClientId = "093e6c05-7227-4b80-bd79-2ef280a3f869";
-		private string TenantId = "f8cdef31-a31e-4b4a-93e4-5f571e91255a";
+		private string ClientId = "クライアントID";
+		private string TenantId = "テナントID";
 
 		public OneDriveAccessUpload()
 		{
@@ -29,7 +29,6 @@ namespace ElectronicSeal
 			this.Close();
 		}
 
-
         private async void button1_Click(object sender, EventArgs e)
         {
             //アップロード
@@ -39,8 +38,8 @@ namespace ElectronicSeal
             PublicClientApp = app.Build();
             //
             string[] scopes = new string[] { "User.ReadWrite.All" };
-            string account = "eseal0skill0test@gmail.com";
-            string password = "system4199";
+            string account  = "OneDriveにサインインするアカウント";
+            string password = "OneDriveにサインインするアカウントのパスワード";
             System.Security.SecureString secpass = new System.Security.SecureString();
 
             foreach (char c in password) secpass.AppendChar(c);
@@ -62,11 +61,6 @@ namespace ElectronicSeal
             DriveItem item = await client.Me.Drive.Root.ItemWithPath("upload-test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
 
             textBox1.Text += "アップロードしました。";
-        }
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-           
         }
 	}
 }
