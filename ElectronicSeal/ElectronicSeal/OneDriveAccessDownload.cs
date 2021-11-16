@@ -7,39 +7,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Web;
-using Google.Apis.Drive.v3;
-using System.IO;
+using Microsoft.Identity.Client;
+using Microsoft.Graph;
 
 namespace ElectronicSeal
 {
-	public partial class OneDriveAccessDownload : Form
+    //参考サイト: https://www.ipentec.com/document/csharp-onedrive-download-file
+    public partial class OneDriveAccessDownload : Form
 	{
-        //GoogleDriveのフォルダID
-        private string myDriveFileId = "1XIg_KtZ9jr19rw9FxlFDV1r4YM-SPgcK";
-
-        //FolderBrowserDialogクラスのインスタンスを作成
-        FolderBrowserDialog fbd = new FolderBrowserDialog();
+        public static IPublicClientApplication PublicClientApp;
+        private string ClientId = "(クライアントID)";
+        private string TenantId = "(テナントID)";
 
         public OneDriveAccessDownload()
 		{
 			InitializeComponent();
-
-            //GoogleDriveの対象のファイルIDを初期表示する ToDoこれをどのように指定するか考慮が必要
-            this.textBox1.Text = myDriveFileId;
-
-            //上部に表示する説明テキストを指定する
-            fbd.Description = "フォルダを指定してください。";
-            //ルートフォルダを指定する
-            //デフォルトでDesktop
-            fbd.RootFolder = Environment.SpecialFolder.Desktop;
-            //ユーザーが新しいフォルダを作成できるようにする
-            //デフォルトでTrue
-            fbd.ShowNewFolderButton = true;
         }
-
-        //Google API サービスアカウントの認証キー
-        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
 
         private void btnGAccess_Click(object sender, EventArgs e)
 		{
@@ -47,51 +30,43 @@ namespace ElectronicSeal
 			this.Close();
 		}
 
-		static string[] Scopes = { DriveService.Scope.Drive };
+        private async void button1_Click(object sender, EventArgs e)
+        {
+            PublicClientApplicationBuilder app = PublicClientApplicationBuilder.Create(ClientId);
+            app = app.WithRedirectUri("https://login.microsoftonline.com/common/oauth2/nativeclient");
+            app = app.WithAuthority(AzureCloudInstance.AzurePublic, TenantId);
+            PublicClientApp = app.Build();
+            //
+            string[] scopes = new string[] { "User.ReadWrite.All" };
+            string account = "(OneDriveにサインインするアカウント)";
+            string password = "(OneDriveにサインインするアカウントのパスワード)";
+            System.Security.SecureString secpass = new System.Security.SecureString();
 
-		private void button1_Click(object sender, EventArgs e)
-		{
-            FileStream fs = new FileStream(google_api_service_account_key, FileMode.Open, FileAccess.Read);
-            Google.Apis.Auth.OAuth2.GoogleCredential credential = Google.Apis.Auth.OAuth2.GoogleCredential.FromStream(fs).CreateScoped(Scopes);
+            foreach (char c in password) secpass.AppendChar(c);
 
-            Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
-            init.HttpClientInitializer = credential;
-            init.ApplicationName = "ElectronicSeal";
-            DriveService service = new DriveService(init);
+            AcquireTokenByUsernamePasswordParameterBuilder builder = PublicClientApp.AcquireTokenByUsernamePassword(scopes, account, secpass);
+            AuthenticationResult authResult = await builder.ExecuteAsync();
 
-            //FileInfo
-            Google.Apis.Drive.v3.Data.File file = service.Files.Get(textBox1.Text).Execute();
-            textBox2.Text += string.Format("ID:{0} のファイル情報を取得しました。 MimeType:{1}\r\n", file.Name, file.MimeType);
+            DelegateAuthenticationProvider prov = new DelegateAuthenticationProvider(
+              (requestMessage) =>
+              {
+                  requestMessage.Headers.Authorization = new System.Net.Http.Headers.AuthenticationHeaderValue("bearer", authResult.AccessToken);
+                  return Task.FromResult(0);
+              }
+              );
+            GraphServiceClient client = new GraphServiceClient(prov);
 
-            //Download
-            FilesResource.GetRequest req = service.Files.Get(textBox1.Text);
+            System.IO.Stream stream = await client.Me.Drive.Items["01VGRRKKPLGAETCFNMJRF3TAHROCGS2ZB6"].Content.Request().GetAsync();
+            byte[] buffer = new byte[stream.Length];
+            stream.Read(buffer, 0, buffer.Length);
+            stream.Close();
 
-            //ExoprtFolder
-            string exoprtFolder = textBox3.Text;
+            System.IO.FileStream fs = new System.IO.FileStream("download-test.png", System.IO.FileMode.CreateNew);
+            fs.Write(buffer, 0, buffer.Length);
+            fs.Close();
 
-            if(exoprtFolder.Length < 1)
-			{
-                MessageBox.Show("出力先を選択してください", "確認");
-            }
-
-            FileStream dfs = new FileStream(exoprtFolder + "\\" + file.Name, FileMode.Create, FileAccess.Write);
-            //FileStream dfs = new FileStream("c:\\data\\" + file.Name, FileMode.Create, FileAccess.Write);
-            req.Download(dfs);
-            dfs.Close();
-
-            textBox2.Text += "ファイルのダウンロードが完了しました。\r\n";
+            textBox1.Text += "ダウンロードしました。";
         }
 
-        
-
-		private void button2_Click(object sender, EventArgs e)
-		{
-            //ダイアログを表示する
-            if (fbd.ShowDialog(this) == DialogResult.OK)
-            {
-                textBox3.Text = fbd.SelectedPath;
-            }
-
-        }
 	}
 }

@@ -12,11 +12,12 @@ using Microsoft.Graph;
 
 namespace ElectronicSeal
 {
-	public partial class OneDriveAccessUpload : Form
+    //参考サイト: https://www.ipentec.com/document/csharp-onedrive-upload-file
+    public partial class OneDriveAccessUpload : Form
 	{
 		public static IPublicClientApplication PublicClientApp;
-		private string ClientId = "クライアントID";
-		private string TenantId = "テナントID";
+		private string ClientId = "(クライアントID)";
+		private string TenantId = "(テナントID)";
 
 		public OneDriveAccessUpload()
 		{
@@ -38,8 +39,8 @@ namespace ElectronicSeal
             PublicClientApp = app.Build();
             //
             string[] scopes = new string[] { "User.ReadWrite.All" };
-            string account  = "OneDriveにサインインするアカウント";
-            string password = "OneDriveにサインインするアカウントのパスワード";
+            string account  = "(OneDriveにサインインするアカウント)";
+            string password = "(OneDriveにサインインするアカウントのパスワード)";
             System.Security.SecureString secpass = new System.Security.SecureString();
 
             foreach (char c in password) secpass.AppendChar(c);

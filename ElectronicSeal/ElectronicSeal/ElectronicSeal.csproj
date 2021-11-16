@@ -231,6 +231,9 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="download-test.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="test02.txt">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
