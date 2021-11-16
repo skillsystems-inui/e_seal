@@ -112,6 +112,30 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="DropBoxAccessUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropBoxAccessUpload.Designer.cs">
+      <DependentUpon>DropBoxAccessUpload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="DropBoxAccessDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="DropBoxAccessDownload.Designer.cs">
+      <DependentUpon>DropBoxAccessDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OneDriveAccessDownload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OneDriveAccessDownload.Designer.cs">
+      <DependentUpon>OneDriveAccessDownload.cs</DependentUpon>
+    </Compile>
+    <Compile Include="OneDriveAccessUpload.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="OneDriveAccessUpload.Designer.cs">
+      <DependentUpon>OneDriveAccessUpload.cs</DependentUpon>
+    </Compile>
     <Compile Include="GoogleDriveAccessDownload.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -150,6 +174,18 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="DropBoxAccessUpload.resx">
+      <DependentUpon>DropBoxAccessUpload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="DropBoxAccessDownload.resx">
+      <DependentUpon>DropBoxAccessDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OneDriveAccessDownload.resx">
+      <DependentUpon>OneDriveAccessDownload.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="OneDriveAccessUpload.resx">
+      <DependentUpon>OneDriveAccessUpload.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GoogleDriveAccessDownload.resx">
       <DependentUpon>GoogleDriveAccessDownload.cs</DependentUpon>
     </EmbeddedResource>
