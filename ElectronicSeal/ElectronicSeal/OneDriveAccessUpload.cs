@@ -16,10 +16,10 @@ namespace ElectronicSeal
     public partial class OneDriveAccessUpload : Form
 	{
 		public static IPublicClientApplication PublicClientApp;
-		private string ClientId = "(クライアントID)";
-		private string TenantId = "(テナントID)";
+		private string ClientId = "(クライアントID)";//取得方法: https://www.ipentec.com/document/microsoft-azure-register-application-in-azure-active-directory
+        private string TenantId = "(テナントID)";//取得方法: https://www.ipentec.com/document/microsoft-azure-register-application-in-azure-active-directory
 
-		public OneDriveAccessUpload()
+        public OneDriveAccessUpload()
 		{
 			InitializeComponent();
         }
@@ -57,9 +57,11 @@ namespace ElectronicSeal
               );
             GraphServiceClient client = new GraphServiceClient(prov);
 
-            System.IO.StreamReader reader = System.IO.File.OpenText("test02.txt");
-
-            DriveItem item = await client.Me.Drive.Root.ItemWithPath("upload-test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
+            string local_file_name = "test02.txt";//アップロード元のファイル名
+            string global_file_name = "test02.txt";//アップロード先のファイル名
+            
+            System.IO.StreamReader reader = System.IO.File.OpenText(local_file_name);
+            DriveItem item = await client.Me.Drive.Root.ItemWithPath(global_file_name).Content.Request().PutAsync<DriveItem>(reader.BaseStream);
 
             textBox1.Text += "アップロードしました。";
         }

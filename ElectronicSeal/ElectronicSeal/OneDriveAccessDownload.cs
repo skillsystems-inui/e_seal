@@ -16,8 +16,8 @@ namespace ElectronicSeal
     public partial class OneDriveAccessDownload : Form
 	{
         public static IPublicClientApplication PublicClientApp;
-        private string ClientId = "(クライアントID)";
-        private string TenantId = "(テナントID)";
+        private string ClientId = "(クライアントID)";//取得方法: https://www.ipentec.com/document/microsoft-azure-register-application-in-azure-active-directory
+        private string TenantId = "(テナントID)";//取得方法: https://www.ipentec.com/document/microsoft-azure-register-application-in-azure-active-directory
 
         public OneDriveAccessDownload()
 		{
@@ -61,7 +61,8 @@ namespace ElectronicSeal
             stream.Read(buffer, 0, buffer.Length);
             stream.Close();
 
-            System.IO.FileStream fs = new System.IO.FileStream("download-test.png", System.IO.FileMode.CreateNew);
+            string download_file_name = "download-test.png";//ダウンロードファイル名
+            System.IO.FileStream fs = new System.IO.FileStream(download_file_name, System.IO.FileMode.CreateNew);
             fs.Write(buffer, 0, buffer.Length);
             fs.Close();
 
