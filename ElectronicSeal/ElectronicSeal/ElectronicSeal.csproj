@@ -36,6 +36,9 @@
     <Reference Include="Azure.Core, Version=1.0.1.0, Culture=neutral, PublicKeyToken=92742159e12e44c8, processorArchitecture=MSIL">
       <HintPath>..\packages\Azure.Core.1.0.1\lib\netstandard2.0\Azure.Core.dll</HintPath>
     </Reference>
+    <Reference Include="Dropbox.Api, Version=6.19.0.0, Culture=neutral, PublicKeyToken=310f0e82fbb45d01, processorArchitecture=MSIL">
+      <HintPath>..\packages\Dropbox.Api.6.19.0\lib\netstandard2.0\Dropbox.Api.dll</HintPath>
+    </Reference>
     <Reference Include="Google.Apis, Version=1.52.0.0, Culture=neutral, PublicKeyToken=4b01fa6e34db77ab, processorArchitecture=MSIL">
       <HintPath>..\packages\Google.Apis.1.52.0\lib\net45\Google.Apis.dll</HintPath>
     </Reference>
@@ -124,6 +127,7 @@
     <Compile Include="DropBoxAccessDownload.Designer.cs">
       <DependentUpon>DropBoxAccessDownload.cs</DependentUpon>
     </Compile>
+    <Compile Include="DropboxManege.cs" />
     <Compile Include="OneDriveAccessDownload.cs">
       <SubType>Form</SubType>
     </Compile>

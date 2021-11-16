@@ -27,44 +27,32 @@ namespace ElectronicSeal
 
 		private void btnGAccess_Click(object sender, EventArgs e)
 		{
-			//GoogleDriveアクセス 
-			GoogleDriveAccessUpload gda = new GoogleDriveAccessUpload();
-			gda.ShowDialog();
+			
 		}
 
 		private void btnGAccessDownload_Click(object sender, EventArgs e)
 		{
-			//GoogleDriveアクセスダウンロード 
-			GoogleDriveAccessDownload gda = new GoogleDriveAccessDownload();
-			gda.ShowDialog();
+			
 		}
 
 		private void btnOAccessUpload_Click(object sender, EventArgs e)
 		{
-			//OneDriveアクセスアップロード 
-			OneDriveAccessUpload gda = new OneDriveAccessUpload();
-			gda.ShowDialog();
+			
 		}
 
 		private void btnOAccessDownload_Click(object sender, EventArgs e)
 		{
-			//OneDriveアクセスダウンロード 
-			OneDriveAccessDownload gda = new OneDriveAccessDownload();
-			gda.ShowDialog();
+			
 		}
 
 		private void btnDAccessUpload_Click(object sender, EventArgs e)
 		{
-			//DropBoxアクセスアップロード 
-			DropBoxAccessUpload gda = new DropBoxAccessUpload();
-			gda.ShowDialog();
+			
 		}
 
 		private void btnDAccessDownload_Click(object sender, EventArgs e)
 		{
-			//DropBoxアクセスダウンロード 
-			DropBoxAccessDownload gda = new DropBoxAccessDownload();
-			gda.ShowDialog();
+			
 		}
 	}
 }
