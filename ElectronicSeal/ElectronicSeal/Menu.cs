@@ -28,7 +28,7 @@ namespace ElectronicSeal
 		private void btnGAccess_Click(object sender, EventArgs e)
 		{
 			//GoogleDriveアクセス 
-			GoogleDriveAccess gda = new GoogleDriveAccess();
+			GoogleDriveAccessUpload gda = new GoogleDriveAccessUpload();
 			gda.ShowDialog();
 		}
 

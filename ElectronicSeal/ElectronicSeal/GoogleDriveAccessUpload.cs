@@ -13,21 +13,17 @@ using System.IO;
 
 namespace ElectronicSeal
 {
-	public partial class GoogleDriveAccess : Form
+	public partial class GoogleDriveAccessUpload : Form
 	{
-        //GoogleDriveのフォルダID
-        private string myDriveFolderId = "1jTtHCWA1n3iI026QKYwdFnfYa9uPWaZe";
-        
-        public GoogleDriveAccess()
+        //GoogleDriveのフォルダID  ToDoどこでこれを指定するか考慮が必要
+        private string myDriveFolderId = "1jTtHCWA1n3iI026QKYwdFnfYa9uPWaZe";                      //取得方法: https://intercom.help/roboticcrowd/ja/articles/2416227-08-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABid-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AAid
+        //Google API サービスアカウントの認証キー  ToDoどこでこれを指定するか考慮が必要
+        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json"; //取得方法: https://www.ipentec.com/document/software-google-cloud-platform-get-service-account-key
+
+        public GoogleDriveAccessUpload()
 		{
 			InitializeComponent();
-
-            //GoogleDriveのフォルダIDを初期表示する ToDoこれをどのように指定するか考慮が必要
-            this.textBox2.Text = myDriveFolderId;
         }
-
-        //Google API サービスアカウントの認証キー
-        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
 
         private void btnGAccess_Click(object sender, EventArgs e)
 		{
@@ -60,7 +56,7 @@ namespace ElectronicSeal
 
             Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
             init.HttpClientInitializer = credential;
-            init.ApplicationName = "ElectronicSeal";
+            init.ApplicationName = "ElectronicSeal";//プロジェクト名を指定
             DriveService service = new DriveService(init);
 
 
@@ -76,7 +72,7 @@ namespace ElectronicSeal
                 Google.Apis.Drive.v3.Data.File meta = new Google.Apis.Drive.v3.Data.File();
                 meta.Name = Path.GetFileName(textBox1.Text);
                 meta.MimeType = ContentType;
-                meta.Parents = new List<string>() { textBox2.Text };
+                meta.Parents = new List<string>() { myDriveFolderId };
 
                 Google.Apis.Drive.v3.FilesResource.CreateMediaUpload req = service.Files.Create(meta, fsu, ContentType);
                 req.Fields = "id, name";

@@ -15,7 +15,7 @@ namespace ElectronicSeal
 {
 	public partial class DropBoxAccessDownload : Form
 	{
-        //GoogleDriveのフォルダID
+        //GoogleDriveのフォルダID ToDoこれをどのように指定するか考慮が必要
         private string myDriveFileId = "1XIg_KtZ9jr19rw9FxlFDV1r4YM-SPgcK";
 
         //FolderBrowserDialogクラスのインスタンスを作成
@@ -24,9 +24,6 @@ namespace ElectronicSeal
         public DropBoxAccessDownload()
 		{
 			InitializeComponent();
-
-            //GoogleDriveの対象のファイルIDを初期表示する ToDoこれをどのように指定するか考慮が必要
-            this.textBox1.Text = myDriveFileId;
 
             //上部に表示する説明テキストを指定する
             fbd.Description = "フォルダを指定してください。";
@@ -60,11 +57,11 @@ namespace ElectronicSeal
             DriveService service = new DriveService(init);
 
             //FileInfo
-            Google.Apis.Drive.v3.Data.File file = service.Files.Get(textBox1.Text).Execute();
+            Google.Apis.Drive.v3.Data.File file = service.Files.Get(myDriveFileId).Execute();
             textBox2.Text += string.Format("ID:{0} のファイル情報を取得しました。 MimeType:{1}\r\n", file.Name, file.MimeType);
 
             //Download
-            FilesResource.GetRequest req = service.Files.Get(textBox1.Text);
+            FilesResource.GetRequest req = service.Files.Get(myDriveFileId);
 
             //ExoprtFolder
             string exoprtFolder = textBox3.Text;

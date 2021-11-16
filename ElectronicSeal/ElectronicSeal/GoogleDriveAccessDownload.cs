@@ -15,8 +15,10 @@ namespace ElectronicSeal
 {
 	public partial class GoogleDriveAccessDownload : Form
 	{
-        //GoogleDriveのフォルダID
-        private string myDriveFileId = "1XIg_KtZ9jr19rw9FxlFDV1r4YM-SPgcK";
+        //GoogleDriveのフォルダID ToDoこれをどのように指定するか考慮が必要
+        private string myDriveFileId = "1XIg_KtZ9jr19rw9FxlFDV1r4YM-SPgcK";                         //取得方法: https://intercom.help/roboticcrowd/ja/articles/2416227-08-%E3%83%95%E3%82%A1%E3%82%A4%E3%83%ABid-%E3%83%87%E3%82%A3%E3%83%AC%E3%82%AF%E3%83%88%E3%83%AAid
+        //Google API サービスアカウントの認証キー  ToDoどこでこれを指定するか考慮が必要
+        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";  //取得方法: https://www.ipentec.com/document/software-google-cloud-platform-get-service-account-key
 
         //FolderBrowserDialogクラスのインスタンスを作成
         FolderBrowserDialog fbd = new FolderBrowserDialog();
@@ -24,9 +26,6 @@ namespace ElectronicSeal
         public GoogleDriveAccessDownload()
 		{
 			InitializeComponent();
-
-            //GoogleDriveの対象のファイルIDを初期表示する ToDoこれをどのように指定するか考慮が必要
-            this.textBox1.Text = myDriveFileId;
 
             //上部に表示する説明テキストを指定する
             fbd.Description = "フォルダを指定してください。";
@@ -37,9 +36,6 @@ namespace ElectronicSeal
             //デフォルトでTrue
             fbd.ShowNewFolderButton = true;
         }
-
-        //Google API サービスアカウントの認証キー
-        private string google_api_service_account_key = "smooth-tendril-331806-ba3cda45c3d5.json";
 
         private void btnGAccess_Click(object sender, EventArgs e)
 		{
@@ -56,15 +52,15 @@ namespace ElectronicSeal
 
             Google.Apis.Services.BaseClientService.Initializer init = new Google.Apis.Services.BaseClientService.Initializer();
             init.HttpClientInitializer = credential;
-            init.ApplicationName = "ElectronicSeal";
+            init.ApplicationName = "ElectronicSeal";//プロジェクト名を指定
             DriveService service = new DriveService(init);
 
             //FileInfo
-            Google.Apis.Drive.v3.Data.File file = service.Files.Get(textBox1.Text).Execute();
+            Google.Apis.Drive.v3.Data.File file = service.Files.Get(myDriveFileId).Execute();
             textBox2.Text += string.Format("ID:{0} のファイル情報を取得しました。 MimeType:{1}\r\n", file.Name, file.MimeType);
 
             //Download
-            FilesResource.GetRequest req = service.Files.Get(textBox1.Text);
+            FilesResource.GetRequest req = service.Files.Get(myDriveFileId);
 
             //ExoprtFolder
             string exoprtFolder = textBox3.Text;
@@ -81,8 +77,6 @@ namespace ElectronicSeal
 
             textBox2.Text += "ファイルのダウンロードが完了しました。\r\n";
         }
-
-        
 
 		private void button2_Click(object sender, EventArgs e)
 		{
