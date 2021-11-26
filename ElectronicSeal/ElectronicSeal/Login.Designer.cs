@@ -38,6 +38,7 @@ namespace ElectronicSeal
 			this.btnOAccessUpload = new System.Windows.Forms.Button();
 			this.btnGAccessDownload = new System.Windows.Forms.Button();
 			this.btnGAccess = new System.Windows.Forms.Button();
+			this.btnExcel = new System.Windows.Forms.Button();
 			this.SuspendLayout();
 			// 
 			// label1
@@ -122,11 +123,22 @@ namespace ElectronicSeal
 			this.btnGAccess.UseVisualStyleBackColor = true;
 			this.btnGAccess.Click += new System.EventHandler(this.btnGAccess_Click);
 			// 
+			// btnExcel
+			// 
+			this.btnExcel.Location = new System.Drawing.Point(170, 320);
+			this.btnExcel.Name = "btnExcel";
+			this.btnExcel.Size = new System.Drawing.Size(262, 23);
+			this.btnExcel.TabIndex = 17;
+			this.btnExcel.Text = "Excel操作";
+			this.btnExcel.UseVisualStyleBackColor = true;
+			this.btnExcel.Click += new System.EventHandler(this.btnExcel_Click);
+			// 
 			// Login
 			// 
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(628, 386);
+			this.Controls.Add(this.btnExcel);
 			this.Controls.Add(this.btnOAccessDownload);
 			this.Controls.Add(this.btnOAccessUpload);
 			this.Controls.Add(this.btnGAccessDownload);
@@ -154,6 +166,7 @@ namespace ElectronicSeal
 		private System.Windows.Forms.Button btnOAccessUpload;
 		private System.Windows.Forms.Button btnGAccessDownload;
 		private System.Windows.Forms.Button btnGAccess;
+		private System.Windows.Forms.Button btnExcel;
 	}
 }
 
