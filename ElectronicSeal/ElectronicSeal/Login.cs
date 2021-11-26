@@ -51,18 +51,5 @@ namespace ElectronicSeal
 			gda.ShowDialog();
 		}
 
-		private void btnDAccessUpload_Click(object sender, EventArgs e)
-		{
-			//DropBoxアクセスアップロード 
-			DropBoxAccessUpload gda = new DropBoxAccessUpload();
-			gda.ShowDialog();
-		}
-
-		private void btnDAccessDownload_Click(object sender, EventArgs e)
-		{
-			//DropBoxアクセスダウンロード 
-			DropBoxAccessDownload gda = new DropBoxAccessDownload();
-			gda.ShowDialog();
-		}
 	}
 }

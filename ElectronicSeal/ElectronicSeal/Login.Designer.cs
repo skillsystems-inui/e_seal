@@ -34,8 +34,6 @@ namespace ElectronicSeal
 			this.textBox1 = new System.Windows.Forms.TextBox();
 			this.textBox2 = new System.Windows.Forms.TextBox();
 			this.btnLogin = new System.Windows.Forms.Button();
-			this.btnDAccessDownload = new System.Windows.Forms.Button();
-			this.btnDAccessUpload = new System.Windows.Forms.Button();
 			this.btnOAccessDownload = new System.Windows.Forms.Button();
 			this.btnOAccessUpload = new System.Windows.Forms.Button();
 			this.btnGAccessDownload = new System.Windows.Forms.Button();
@@ -84,26 +82,6 @@ namespace ElectronicSeal
 			this.btnLogin.UseVisualStyleBackColor = true;
 			this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
 			// 
-			// btnDAccessDownload
-			// 
-			this.btnDAccessDownload.Location = new System.Drawing.Point(170, 348);
-			this.btnDAccessDownload.Name = "btnDAccessDownload";
-			this.btnDAccessDownload.Size = new System.Drawing.Size(262, 23);
-			this.btnDAccessDownload.TabIndex = 18;
-			this.btnDAccessDownload.Text = "DropBoxダウンロード";
-			this.btnDAccessDownload.UseVisualStyleBackColor = true;
-			this.btnDAccessDownload.Click += new System.EventHandler(this.btnDAccessDownload_Click);
-			// 
-			// btnDAccessUpload
-			// 
-			this.btnDAccessUpload.Location = new System.Drawing.Point(170, 319);
-			this.btnDAccessUpload.Name = "btnDAccessUpload";
-			this.btnDAccessUpload.Size = new System.Drawing.Size(262, 23);
-			this.btnDAccessUpload.TabIndex = 17;
-			this.btnDAccessUpload.Text = "DropBoxアップロード";
-			this.btnDAccessUpload.UseVisualStyleBackColor = true;
-			this.btnDAccessUpload.Click += new System.EventHandler(this.btnDAccessUpload_Click);
-			// 
 			// btnOAccessDownload
 			// 
 			this.btnOAccessDownload.Location = new System.Drawing.Point(170, 280);
@@ -149,8 +127,6 @@ namespace ElectronicSeal
 			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
 			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
 			this.ClientSize = new System.Drawing.Size(628, 386);
-			this.Controls.Add(this.btnDAccessDownload);
-			this.Controls.Add(this.btnDAccessUpload);
 			this.Controls.Add(this.btnOAccessDownload);
 			this.Controls.Add(this.btnOAccessUpload);
 			this.Controls.Add(this.btnGAccessDownload);
@@ -174,8 +150,6 @@ namespace ElectronicSeal
 		private System.Windows.Forms.TextBox textBox1;
 		private System.Windows.Forms.TextBox textBox2;
 		private System.Windows.Forms.Button btnLogin;
-		private System.Windows.Forms.Button btnDAccessDownload;
-		private System.Windows.Forms.Button btnDAccessUpload;
 		private System.Windows.Forms.Button btnOAccessDownload;
 		private System.Windows.Forms.Button btnOAccessUpload;
 		private System.Windows.Forms.Button btnGAccessDownload;
