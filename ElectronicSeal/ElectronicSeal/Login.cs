@@ -12,12 +12,15 @@ using System.Collections.Generic;
 using Azure;
 using Azure.Communication;
 using Azure.Communication.Sms;
+using Azure.Identity;
 
 
 namespace ElectronicSeal
 {
 	public partial class Login : Form
 	{
+		private DefaultAzureCredential credential = new DefaultAzureCredential();
+
 		public Login()
 		{
 			InitializeComponent();
@@ -35,30 +38,29 @@ namespace ElectronicSeal
 			// 確認コードを生成する
 			Random rdm = new System.Random();
 			int kakuninCode = rdm.Next(100000, 999999);//6桁の乱数生成
-													   // 
-			// This code demonstrates how to fetch your connection string
-			// from an environment variable.
-			string connectionString = Environment.GetEnvironmentVariable("COMMUNICATION_SERVICES_CONNECTION_STRING");
+													   
+
+
+			/**** ToDo相談　/
+			//string connectionString = Environment.GetEnvironmentVariable("endpoint=https://resource01.communication.azure.com/;accesskey=YzFNe2boAchaW9NwSJC6qIXW/Tv3xrTKXl+0MYK6Hq2DiBPe51rSDULUDrMRy8WLgqqraOhaUdD0L1TZjloxtQ==");
+			string connectionString = "endpoint=https://resource01.communication.azure.com/;accesskey=YzFNe2boAchaW9NwSJC6qIXW/Tv3xrTKXl+0MYK6Hq2DiBPe51rSDULUDrMRy8WLgqqraOhaUdD0L1TZjloxtQ==";
 			//ToDo: Azure CommunicationServicesリソースから取得した接続文字列
 			SmsClient smsClient = new SmsClient(connectionString);
+			//SmsClient smsClient = new SmsClient("https://resource01.communication.azure.com/");
 			SmsSendResult sendResult = smsClient.Send(
-				from: "06-1111-2222",
-				to: "090-5046-1402",
+				from: "+819011112222",
+				to: "+819050461402",
 				message: "Hello World via SMS"
 			);
-			/*
-			 * SmsSendResult sendResult = smsClient.Send(
-				from: "<from-phone-number>",
-				to: "<to-phone-number>",
-				message: "Hello World via SMS"
-			);
-			 */
-
-			//			Console.WriteLine($"Sms id: {sendResult.MessageId}");
-
+			//番号指定: https://knowledge.cpi.ad.jp/tech/131/
+			/****/
+			
 			Menu menu = new Menu();
 			menu.ShowDialog();
 		}
+
+
+
 
 		private void btnGAccess_Click(object sender, EventArgs e)
 		{
