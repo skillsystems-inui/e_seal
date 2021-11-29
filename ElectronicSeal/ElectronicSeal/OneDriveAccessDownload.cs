@@ -10,6 +10,8 @@ using System.Windows.Forms;
 using Microsoft.Identity.Client;
 using Microsoft.Graph;
 using Microsoft.Graph.Auth;
+using Azure.Identity;
+using System.IO;
 
 namespace ElectronicSeal
 {
@@ -28,7 +30,7 @@ namespace ElectronicSeal
         // TODO: Azure AD の Tenant Id をセット
         private const string TenantId = "620696c7-5cdc-427d-a350-8ea372da63fe";
         // TODO: Azure AD のアプリのシークレットをセット
-        private const string ClientSecret = "g2A7Q~5fuXmfXiW78diE-WM~UdNaeqyuei2uX";
+        private const string ClientSecret = "-Mp7Q~c8u2Z7wXn8WDFJ.AfZCy7PZkHnd06c8";//g2A7Q~5fuXmfXiW78diE-WM~UdNaeqyuei2uX
 
         public OneDriveAccessDownload()
 		{
@@ -43,6 +45,8 @@ namespace ElectronicSeal
 
         private async void button1_Click(object sender, EventArgs e)
         {
+
+            /*↓　いったん*/
             //ユーザ認証　参考サイト:https://blog.beachside.dev/entry/2021/03/31/190000
             // GraphService Client の初期化
             var confidentialClientApplication = ConfidentialClientApplicationBuilder
@@ -53,6 +57,36 @@ namespace ElectronicSeal
 
             var provider = new ClientCredentialProvider(confidentialClientApplication);
             var graphServiceClient = new GraphServiceClient(provider);
+
+            
+
+            /*これはだめ
+            var authorizationCode = "AUTH_CODE_FROM_REDIRECT";
+            var scopes = new[] { "User.Read" };
+            var tenantId = "common";
+
+            // using Azure.Identity;
+            var options = new TokenCredentialOptions
+            {
+                AuthorityHost = AzureAuthorityHosts.AzurePublicCloud
+            };
+
+            // https://docs.microsoft.com/dotnet/api/azure.identity.authorizationcodecredential
+            var authCodeCredential = new AuthorizationCodeCredential(
+                tenantId, ClientId, ClientSecret, authorizationCode, options);
+
+            var graphServiceClient = new GraphServiceClient(authCodeCredential, scopes);
+            */
+
+
+            //test!!!!!
+            /*
+            var children = await graphServiceClient.Me.Drive.Root.Children
+    .Request()
+    .GetAsync();
+            */
+
+
 
 
 
@@ -89,17 +123,31 @@ namespace ElectronicSeal
             //test
             var users = await graphServiceClient.Users.Request().GetAsync();
 
-            /* ここは通るようになった
+            string user_Id = "";
+
+            /* ここは通るようになった*/
             foreach (var user in users)
             {
-                Console.WriteLine($"{user.Id} - DisplayName: {user.DisplayName} (Email: {user.Mail})");
+                //Console.WriteLine($"{user.Id} - DisplayName: {user.DisplayName} (Email: {user.Mail})");
+
+                user_Id = user.Id;
+
             }
-            */
+
+            //test
+            ClientCredentialProvider authProvider = new ClientCredentialProvider(confidentialClientApplication);
+            var graphClient = new GraphServiceClient(authProvider);
+            StreamReader reader = System.IO.File.OpenText("test02.txt");
+            //var uploadedFile = graphClient.Users[user_Id].Drive.Root.ItemWithPath("test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream).GetAwaiter().GetResult();
+            var uploadedFile = graphClient.Users[user_Id].Drive.Root.ItemWithPath("test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
+
+
+            /////IDriveItemChildrenCollectionPage items = await graphServiceClient.Me.Drive.Root.Children.Request().GetAsync();
 
             //koko! https://www.ipentec.com/document/csharp-onedrive-upload-file#section_06    アクセスはできたけどファイル操作の方法がおかしい？？？
-            System.IO.StreamReader reader = System.IO.File.OpenText("test02.txt");
+            /////System.IO.StreamReader reader = System.IO.File.OpenText("test02.txt");
 
-            DriveItem item = await graphServiceClient.Me.Drive.Root.ItemWithPath("upload-test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
+            /////DriveItem item = await graphServiceClient.Me.Drive.Root.ItemWithPath("test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
 
             textBox1.Text += "アップロードしました。";
 
