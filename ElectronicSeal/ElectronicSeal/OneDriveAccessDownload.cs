@@ -139,7 +139,7 @@ namespace ElectronicSeal
             var graphClient = new GraphServiceClient(authProvider);
             StreamReader reader = System.IO.File.OpenText("test02.txt");
             //var uploadedFile = graphClient.Users[user_Id].Drive.Root.ItemWithPath("test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream).GetAwaiter().GetResult();
-            var uploadedFile = graphClient.Users[user_Id].Drive.Root.ItemWithPath("test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
+            DriveItem item = await graphClient.Users[user_Id].Drive.Root.ItemWithPath("upload-test.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
 
 
             /////IDriveItemChildrenCollectionPage items = await graphServiceClient.Me.Drive.Root.Children.Request().GetAsync();
