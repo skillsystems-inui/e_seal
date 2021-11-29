@@ -24,11 +24,11 @@ namespace ElectronicSeal
         //private string TenantId = "9a2b6042-672c-418f-9a15-803428065d50";
 
         // TODO: Azure AD の Client Id をセット
-        private const string ClientId = "47e3f8bf-3a02-41b6-9158-04af7c58ec44";
+        private const string ClientId = "6eea2055-9558-4b40-a0b1-382bdb3d083e";
         // TODO: Azure AD の Tenant Id をセット
         private const string TenantId = "620696c7-5cdc-427d-a350-8ea372da63fe";
         // TODO: Azure AD のアプリのシークレットをセット
-        private const string ClientSecret = "JRS7Q~-YquT-T7w~muAxmVjZwuaRFdTFs_UQN";
+        private const string ClientSecret = "g2A7Q~5fuXmfXiW78diE-WM~UdNaeqyuei2uX";
 
         public OneDriveAccessDownload()
 		{
@@ -53,6 +53,9 @@ namespace ElectronicSeal
 
             var provider = new ClientCredentialProvider(confidentialClientApplication);
             var graphServiceClient = new GraphServiceClient(provider);
+
+
+
             /**
             PublicClientApplicationBuilder app = PublicClientApplicationBuilder.Create(ClientId);
             app = app.WithRedirectUri("https://login.microsoftonline.com/common/oauth2/nativeclient");
@@ -86,12 +89,14 @@ namespace ElectronicSeal
             //test
             var users = await graphServiceClient.Users.Request().GetAsync();
 
+            /* ここは通るようになった
             foreach (var user in users)
             {
                 Console.WriteLine($"{user.Id} - DisplayName: {user.DisplayName} (Email: {user.Mail})");
             }
+            */
 
-
+            //koko! https://www.ipentec.com/document/csharp-onedrive-upload-file#section_06    アクセスはできたけどファイル操作の方法がおかしい？？？
             System.IO.StreamReader reader = System.IO.File.OpenText("test02.txt");
 
             DriveItem item = await graphServiceClient.Me.Drive.Root.ItemWithPath("upload-test02.txt").Content.Request().PutAsync<DriveItem>(reader.BaseStream);
